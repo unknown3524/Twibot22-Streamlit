@@ -113,7 +113,7 @@ if st.sidebar.button("Predict"):
     st.write('##### Original input data')
     df1 = pd.DataFrame({"ID": [random_id], "Label": [random_label]})
     st.dataframe(df1)
-    st.code("Tweets", get_tweets(random_id), language="json")
+    st.text_area("Tweets", get_tweets(random_id), height=200)
 
     with st.spinner("Making predictions..."):
         # Apply the model to make predictions
