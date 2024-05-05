@@ -5,6 +5,7 @@ import pickle
 import numpy as np
 import json
 import random
+import time
 
 sample_id_tweet = json.load(open('sample_id_tweet.json', encoding='utf-8'))
 sample_label = pd.read_csv('sample_label.csv')
@@ -99,6 +100,7 @@ st.markdown(
 # Sidebar
 st.sidebar.header("Please use the Predict button to start making predictions.")
 if st.sidebar.button("Predict"):
+    st.divider()
     # Load the data
     sample_label_data = pd.read_csv("sample_label.csv")
 
@@ -108,20 +110,19 @@ if st.sidebar.button("Predict"):
     random_label = random_row.iloc[0]['Label']
 
     # Display the randomly selected input data
-    # st.write('--------------------------------------------------------------------')
-    st.divider()
     st.write('##### Original input data')
     df1 = pd.DataFrame({"ID": [random_id], "Label": [random_label]})
     st.dataframe(df1)
     st.text_area("Tweets", get_tweets(random_id), height=200)
-    # st.(get_tweets(random_id))
 
-    # Apply the model to make predictions
-    prediction = get_prediction(random_id)
-
-    # Display the prediction result
-    st.write("##### Prediction by XG Boost Classifier")
-    st.write("Prediction : ", f"`{prediction}`")
+    with st.spinner("Making predictions..."):
+        # Apply the model to make predictions
+        prediction = get_prediction(random_id)
+        time.sleep(2)
+        # Display the prediction result
+        st.write("##### Prediction by XG Boost Classifier")
+        st.write("Prediction : ", f"`{prediction}`")
+    st.success("Prediction completed successfully!")
 else:
     # st.write('--------------------------------------------------------------------')
     st.divider()
