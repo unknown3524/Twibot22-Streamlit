@@ -117,10 +117,10 @@ if st.sidebar.button("Predict"):
     st.write('##### Original input data')
     df1 = pd.DataFrame({"ID": [random_id], "Label": [random_label]})
     st.dataframe(df1)
-    if(len(get_tweets(random_id))):
+    if((get_tweets(random_id))):
         st.text_area("Tweets", get_tweets(random_id), height=200)
     else:
-        st.write("No tweets available for this user.")
+        st.error("No tweets available for this user.")
 
     with st.spinner("Making predictions..."):
         # Apply the model to make predictions
