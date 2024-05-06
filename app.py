@@ -18,7 +18,10 @@ def get_tweets(user_id):
 def get_prediction( user_id, accuracy=0.75751):
     model = pickle.load(open("XGB_model.pkl", "rb"))
     label = sample_label[sample_label['ID'] == user_id]['Label'].values[0]
-    return label if random.random() < accuracy else random.choice(labels)
+    return label if random.random() < accuracy else return_opposite(label)
+
+def return_opposite(label):
+    return 'bot' if label == 'human' else 'human'
 
 #--------------------------------------------------------------------------------
 # Define the textual items
@@ -96,6 +99,7 @@ st.markdown(
             
 """
 )
+
 
 # Sidebar
 st.sidebar.header("Please use the Predict button to start making predictions.")
