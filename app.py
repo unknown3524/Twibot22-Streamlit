@@ -126,7 +126,10 @@ if st.sidebar.button("Predict"):
         # Display the prediction result
         st.write("##### Prediction by XG Boost Classifier")
         st.write("Prediction : ", f"`{prediction}`")
-    st.success("Prediction completed successfully!")
+    if prediction == random_label:
+        st.success("Prediction completed successfully!")
+    else:
+        st.error("Prediction failed!")
 else:
     # st.write('--------------------------------------------------------------------')
     st.divider()
